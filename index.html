@@ -5,6 +5,132 @@
   <meta charset="utf-8" />
   <title>Galactic Syndicate</title>
   <style>
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 6px 0 10px;
+    }
+
+    .cta-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .cta-btn.primary {
+      background: rgba(255,106,26,0.16);
+      border: 1px solid rgba(255,106,26,0.5);
+      color: var(--orange);
+      box-shadow: 0 0 12px rgba(255,106,26,0.18);
+    }
+
+    .cta-btn.secondary {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+    }
+
+    .cta-btn:hover { transform: translateY(-1px); }
+
+    .cta-arrow,
+    .cta-or {
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .treasury-cta {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.65);
+      align-items: center;
+    }
+
+    .treasury-cta a {
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .distribution-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .distribution-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .distribution-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .distribution-subtitle {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .distribution-value {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--orange);
+    }
+
+    .stacked-bar {
+      display: flex;
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .stacked-synning {
+      background: linear-gradient(90deg, #ff6a1a, #ff9248);
+      border-right: 1px solid rgba(0,0,0,0.4);
+    }
+
+    .stacked-single { background: linear-gradient(90deg, #8f45d8, #b15cff); }
+
+    .distribution-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.58);
+      font-weight: 700;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-right: 5px;
+    }
+
+    .dot.orange { background: var(--orange); }
+    .dot.purple { background: #9c4fe0; }
+
     :root {
       --bg: #090909;
       --line: rgba(255,255,255,0.08);
@@ -210,11 +336,7 @@
       font-weight: 700;
     }
 
-    .lifetime-arrow {
-      color: var(--orange);
-      opacity: 0.85;
-    }
-
+    .lifetime-arrow { color: var(--orange); opacity: 0.85; }
     .hero-banner-lifetime strong { color: #ffffff; }
 
     .lifetime-label {
@@ -299,27 +421,7 @@
       background: linear-gradient(180deg, rgba(40,24,16,0.95), rgba(18,16,14,0.98));
     }
 
-    .mint-cta-line {
-      margin-bottom: 14px;
-      font-size: 14px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.85);
-    }
-
-    .mint-cta-line span { color: rgba(255,255,255,0.65); }
-
-    .mint-cta-line a {
-      color: var(--orange);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .mint-cta-line a:hover { text-decoration: underline; }
-
-    .progress-panel {
-      display: grid;
-      gap: 14px;
-    }
+    .progress-panel { display: grid; gap: 14px; }
 
     .progress-item {
       background: rgba(255,255,255,0.03);
@@ -484,32 +586,13 @@
       color: rgba(255,255,255,0.6);
     }
 
-    .history-row {
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
+    .history-row { border-top: 1px solid rgba(255,255,255,0.05); }
+    .history-row:nth-child(even) { background: rgba(255,255,255,0.02); }
+    .history-row.latest { background: linear-gradient(90deg, rgba(255,106,26,0.08), rgba(255,255,255,0.01)); }
+    .history-row .up { color: var(--green); font-weight: 700; }
+    .history-row .down { color: #ff6d6d; font-weight: 700; }
 
-    .history-row:nth-child(even) {
-      background: rgba(255,255,255,0.02);
-    }
-
-    .history-row.latest {
-      background: linear-gradient(90deg, rgba(255,106,26,0.08), rgba(255,255,255,0.01));
-    }
-
-    .history-row .up {
-      color: var(--green);
-      font-weight: 700;
-    }
-
-    .history-row .down {
-      color: #ff6d6d;
-      font-weight: 700;
-    }
-
-    a {
-      color: #7fc8ff;
-      text-decoration: none;
-    }
+    a { color: #7fc8ff; text-decoration: none; }
 
     @media (max-width: 1200px) {
       .market-grid { grid-template-columns: repeat(2, 1fr); }
@@ -521,12 +604,7 @@
 
     @media (max-width: 700px) {
       .market-grid { grid-template-columns: 1fr; }
-
-      .hero-banner-inner {
-        padding: 24px 22px;
-        transform: none;
-      }
-
+      .hero-banner-inner { padding: 24px 22px; transform: none; }
       .hero-banner-title { font-size: 32px; }
       .hero-banner-paid { gap: 10px; }
       .hero-banner-paid-number { font-size: 64px; }
@@ -541,7 +619,7 @@
 <body>
   <div class="shell">
     <h1 class="main-title">Galactic Syndicate</h1>
-    <div class="timestamp">Last updated: 24 Apr 2026, 22:58</div>
+    <div class="timestamp">Last updated: 25 Apr 2026, 13:04</div>
 
     <div class="chip-row">
       
@@ -633,56 +711,86 @@
           </div>
 
           
-  <div class="progress-panel">
-    
-  <div class="mint-cta-line">
-    <a href="https://app.backbonelabs.io/nfts/launchpad/galactic-syndicate" target="_blank">Mint a Galactic Syndicate</a>
-    <span>(burn <a href="https://skeletonswap.backbonelabs.io/injective/swap?from=bINJ&to=SYN" target="_blank">10 SYN</a> ~ 2.23 bINJ)</span>
-    <span>or</span>
-    <a href="https://app.backbonelabs.io/nfts/marketplace/collections/inj1jq4k20s97zy6d66x9mp2xxrftwhkynz64tjegj" target="_blank">buy on Marketplace</a>
+  
+  <div class="distribution-block">
+    <div class="distribution-head">
+      <div>
+        <div class="distribution-title">Earning NFTs</div>
+        <div class="distribution-subtitle">
+          6,716 of 7,081 NFTs are earning rewards
+        </div>
+      </div>
+      <div class="distribution-value">94.8%</div>
+    </div>
+
+    <div class="stacked-bar">
+      <div class="stacked-synning" style="width:94.84536082474226%"></div>
+      <div class="stacked-single" style="width:5.154639175257742%"></div>
+    </div>
+
+    <div class="distribution-legend">
+      <span><b class="dot orange"></b> SYNNING NFTs: 6,716</span>
+      <span><b class="dot purple"></b> Single NFT holders (non-earning): 365</span>
+    </div>
   </div>
 
+  <div class="progress-panel">
     
-    <div class="progress-item mint-vs-floor-block">
+    <div class="progress-item best-entry-block">
       <div class="progress-head">
-        <span>Mint vs Floor</span>
-        <span class="mint-vs-floor-value red">+39.4%</span>
+        <span>Best Entry</span>
+        <span class="mint-vs-floor-value green">Marketplace is 28.3% cheaper</span>
       </div>
       <div class="progress-bar">
-        <div class="progress-fill red" style="--target:78.74999999999999%"></div>
+        <div class="progress-fill green" style="--target:28.251121076233176%"></div>
       </div>
       <div class="progress-sub">
-        Mint: 2.23 bINJ equiv. · Floor: 1.60 bINJ
+        Floor: 1.60 bINJ · Mint: 10 SYN ≈ 2.23 bINJ
       </div>
     </div>
   
+    
+  <div class="cta-row">
+    
+    <a class="cta-btn primary" href="https://app.backbonelabs.io/nfts/marketplace/collections/inj1jq4k20s97zy6d66x9mp2xxrftwhkynz64tjegj" target="_blank">Buy Marketplace</a>
+    <span class="cta-or">or</span>
+    <a class="cta-btn secondary" href="https://app.backbonelabs.io/nfts/launchpad/galactic-syndicate" target="_blank">Mint NFT</a>
+    <a class="cta-btn secondary" href="https://skeletonswap.backbonelabs.io/injective/swap?from=bINJ&to=SYN" target="_blank">Get SYN</a>
+  
+  </div>
 
-    <div class="progress-item">
-      <div class="progress-head">
-        <span>Mint Progress</span>
-        <span>7,081 / 10,000</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill orange anim" style="--target:70.81%"></div></div>
-      <div class="progress-sub">70.8% minted</div>
+    
+  <div class="progress-item">
+    <div class="progress-head">
+      <span>Minted Supply</span>
+      <span>7,081 / 10,000</span>
     </div>
+    <div class="progress-bar">
+      <div class="progress-fill orange anim" style="--target:70.81%"></div>
+    </div>
+    <div class="progress-sub">
+      70.8% minted · 2,919 remaining · 70,810 SYN burned
+    </div>
+  </div>
 
-    <div class="progress-item">
-      <div class="progress-head">
-        <span>Supply Remaining</span>
-        <span>2,919 NFTs</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill blue anim" style="--target:29.189999999999998%"></div></div>
-      <div class="progress-sub">29.2% un-minted</div>
+    
+  <div class="progress-item treasury-growth-block">
+    <div class="progress-head">
+      <span>Treasury Growth</span>
+      <span>$29,843 / $100,000</span>
     </div>
+    <div class="progress-bar">
+      <div class="progress-fill green anim" style="--target:29.84296%"></div>
+    </div>
+    <div class="progress-sub">
+      9,016 INJ bonded · 29.8% funded
+    </div>
+    <div class="treasury-cta">
+      <a class="cta-btn" href="https://app.backbonelabs.io/liquid-staking/gravedigger/injective-1" target="_blank">Stake INJ</a>
+      <span>→ grow treasury → increase payouts</span>
+    </div>
+  </div>
 
-    <div class="progress-item">
-      <div class="progress-head">
-        <span>SYN Burn Meter</span>
-        <span>70,810 / 100,000</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill green anim" style="--target:70.81%"></div></div>
-      <div class="progress-sub">70.8% of max burn completed</div>
-    </div>
   </div>
 
         </div>
@@ -720,7 +828,7 @@
   <div class="card ">
     <div class="card-label">Mint Cost</div>
     <div class="card-value">10 SYN</div>
-    <div class="market-sub">≈ 2.23 bINJ / $8.30</div>
+    <div class="market-sub">≈ 2.23 bINJ / $7.38</div>
   </div>
 
   <div class="card ">
